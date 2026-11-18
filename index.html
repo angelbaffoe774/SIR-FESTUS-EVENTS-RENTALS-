@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackone.org.gh | Public Sound Systems, Canopies & Chair Rentals in Ghana</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            slate: '#131C31',
+                            amber: '#F59E0B',
+                            amberHover: '#D97706',
+                            gold: '#FBBF24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Toast Notification Container (Replaces alert()) -->
+    <div id="toast-container" class="fixed bottom-24 right-4 sm:right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        T1
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white block leading-none">
+                            Trackone<span class="text-amber-400">.org.gh</span>
+                        </span>
+                        <span class="text-[11px] uppercase tracking-widest text-slate-400 font-medium">
+                            Trackone Online Store
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                    <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
+                    <a href="#services" class="hover:text-amber-400 transition-colors">Services &amp; Pricing</a>
+                    <a href="#packages" class="hover:text-amber-400 transition-colors">Combo Packages</a>
+                    <a href="#estimator" class="hover:text-amber-400 transition-colors">Quote Estimator</a>
+                    <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Right Actions: Cart Drawer Trigger & Book Now -->
+                <div class="flex items-center gap-3">
+                    <!-- Quote/Cart Drawer Button -->
+                    <button id="open-cart-btn" type="button" aria-label="Open Quote Cart" class="relative p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-amber-400 transition-all flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="hidden sm:inline text-xs font-semibold text-white">Quote List</span>
+                        <span id="cart-badge" class="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-slate-950 bg-amber-400 rounded-full">
+                            0
+                        </span>
+                    </button>
+
+                    <!-- Quick Book Now CTA -->
+                    <a href="#estimator" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md shadow-amber-500/20 transition-all">
+                        Book Now
+                    </a>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle Menu" class="md:hidden p-3 rounded-xl bg-slate-800 text-slate-200 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-slate border-t border-slate-800 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">Home</a>
+            <a href="#services" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">Services &amp; Pricing</a>
+            <a href="#packages" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">Combo Packages</a>
+            <a href="#estimator" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">Quote Estimator</a>
+            <a href="#contact" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">Contact</a>
+            <div class="pt-2">
+                <a href="#estimator" class="block w-full text-center px-5 py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-base">Book Event Rentals Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden bg-brand-dark text-white pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <!-- Subtle Decorative Gradient Glows -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Hero Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700 text-amber-400 text-xs sm:text-sm font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        Trackone Online Store • Serving Accra, Tema, Kumasi &amp; Beyond
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
+                        Premium Event Rentals &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">Sound Systems</span> Across Ghana
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        From crystal-clear public address (PA) sound systems to weather-proof VIP canopies and spotless banquet chairs—Trackone.org.gh delivers, sets up, and powers unforgettable weddings, church programs, funerals, and corporate events.
+                    </p>
+
+                    <!-- Primary & Secondary CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="#services" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base shadow-lg shadow-amber-500/25 transition-all">
+                            Explore Rentals &amp; Pricing
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#estimator" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-slate-800/90 hover:bg-slate-700 text-white border border-slate-700 font-bold text-base transition-all">
+                            Get Instant Quote
+                        </a>
+                    </div>
+
+                    <!-- Quick Trust Metrics -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 max-w-xl">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-amber-400">500+</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Events Powered</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">100%</p>
+                            <p class="text-xs sm:text-sm text-slate-400">On-Time Setup</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-amber-400">24/7</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Sound Tech Support</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Feature Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-brand-slate border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Popular Daily Rates</span>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">Available Today</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Highlight Item 1 -->
+                            <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-sm sm:text-base">Full PA Sound System</h3>
+                                        <p class="text-xs text-slate-400">2 Tops, 2 Subs, Mixer &amp; Wireless Mics</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-extrabold text-amber-400 text-base sm:text-lg block">GH₵ 850</span>
+                                    <span class="text-[11px] text-slate-400">/ day</span>
+                                </div>
+                            </div>
+
+                            <!-- Highlight Item 2 -->
+                            <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-sm sm:text-base">Executive VIP Marquee</h3>
+                                        <p class="text-xs text-slate-400">White Luxury Tent + Lighting Option</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-extrabold text-amber-400 text-base sm:text-lg block">GH₵ 400</span>
+                                    <span class="text-[11px] text-slate-400">/ day</span>
+                                </div>
+                            </div>
+
+                            <!-- Highlight Item 3 -->
+                            <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v18M19 3v18M5 12h14M5 7h14"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-sm sm:text-base">Heavy-Duty Plastic Chairs</h3>
+                                        <p class="text-xs text-slate-400">Clean, Stackable White/Blue Chairs</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-extrabold text-amber-400 text-base sm:text-lg block">GH₵ 5</span>
+                                    <span class="text-[11px] text-slate-400">/ chair / day</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#services" class="block w-full text-center py-3.5 rounded-2xl bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold text-sm transition-colors">
+                            View Full Catalog &amp; Add to Quote →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing Grid Section -->
+    <section id="services" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-amber-600 font-bold uppercase tracking-wider text-xs sm:text-sm">Transparent GH₵ Daily Rates</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Services &amp; Equipment Catalog</h2>
+            <p class="text-slate-600 mt-3 text-base sm:text-lg">
+                Select quantities and add items directly to your Trackone quote list. Volume discounts apply automatically for multi-day bookings.
+            </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10" role="tablist" aria-label="Service Categories">
+            <button type="button" data-filter="all" class="filter-btn active px-5 py-3 rounded-xl font-bold text-sm transition-all bg-brand-dark text-white shadow-md">
+                All Rentals (9)
+            </button>
+            <button type="button" data-filter="sound" class="filter-btn px-5 py-3 rounded-xl font-bold text-sm transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                🔊 Public Sound Systems
+            </button>
+            <button type="button" data-filter="canopies" class="filter-btn px-5 py-3 rounded-xl font-bold text-sm transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                ⛺ Canopies &amp; Marquees
+            </button>
+            <button type="button" data-filter="chairs" class="filter-btn px-5 py-3 rounded-xl font-bold text-sm transition-all bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                🪑 Chairs &amp; Covers
+            </button>
+        </div>
+
+        <!-- Dynamic Equipment Cards Grid -->
+        <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Cards rendered via JavaScript for clean state management -->
+        </div>
+    </section>
+
+    <!-- Combo Event Packages Section -->
+    <section id="packages" class="py-16 sm:py-24 bg-brand-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-amber-400 font-bold uppercase tracking-wider text-xs sm:text-sm">Save Up To 18% With Bundles</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">All-In-One Combo Event Packages</h2>
+                <p class="text-slate-300 mt-3 text-base sm:text-lg">
+                    Complete sound, canopy shelter, and seating packages tailored for Ghanaian celebrations, church crusades, and corporate events.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Tier 1: Basic Gathering -->
+                <div class="bg-brand-slate border border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase">Tier 1 • Intimate</span>
+                            <span class="text-xs text-slate-400">Up to 50 Guests</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Basic Gathering</h3>
+                        <p class="text-slate-400 text-sm mt-2">Ideal for outdoor naming ceremonies, family meetings, and small parties.</p>
+                        <div class="my-6 pb-6 border-b border-slate-800">
+                            <span class="text-4xl font-extrabold text-amber-400">GH₵ 850</span>
+                            <span class="text-slate-400 text-sm"> / day</span>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-slate-300 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>1× Double Speaker + 2 Wireless Mics Set</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>2× Standard 10×10 Event Canopies</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>50× Heavy-Duty Plastic Chairs</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>Free Setup &amp; Sound Check</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="selectPackage('Basic Gathering Package', 850)" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-bold text-sm transition-all">
+                        Select Package
+                    </button>
+                </div>
+
+                <!-- Tier 2: Corporate & Party Pro (Most Popular) -->
+                <div class="bg-gradient-to-b from-slate-800 to-brand-slate border-2 border-amber-500 rounded-3xl p-8 flex flex-col justify-between shadow-2xl shadow-amber-500/10 relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-amber-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-md">
+                        Most Popular in Accra
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 text-xs font-bold uppercase">Tier 2 • Pro Event</span>
+                            <span class="text-xs text-slate-300">Up to 150 Guests</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Corporate &amp; Party Pro</h3>
+                        <p class="text-slate-300 text-sm mt-2">Perfect for engagement ceremonies, birthdays, church programs, and brand activations.</p>
+                        <div class="my-6 pb-6 border-b border-slate-700">
+                            <span class="text-4xl font-extrabold text-amber-400">GH₵ 2,100</span>
+                            <span class="text-slate-300 text-sm"> / day</span>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-slate-200 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>1× Full PA Sound System (2 Tops, 2 Subs, Mixer, 4 Mics)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>2× Executive VIP Marquee Canopies</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>100× Heavy-Duty Chairs + 30× VIP Banquet Chairs</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>Dedicated On-Site Sound Engineer Included</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="selectPackage('Corporate & Party Pro Package', 2100)" class="w-full py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition-all">
+                        Select Package
+                    </button>
+                </div>
+
+                <!-- Tier 3: Grand Wedding / Festival -->
+                <div class="bg-brand-slate border border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-slate-800 text-amber-400 text-xs font-bold uppercase">Tier 3 • Grand Scale</span>
+                            <span class="text-xs text-slate-400">300+ Guests</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Grand Wedding / Festival</h3>
+                        <p class="text-slate-400 text-sm mt-2">High-impact line-array sound, luxury marquees, and VIP seating for major occasions.</p>
+                        <div class="my-6 pb-6 border-b border-slate-800">
+                            <span class="text-4xl font-extrabold text-amber-400">GH₵ 4,500</span>
+                            <span class="text-slate-400 text-sm"> / day</span>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-slate-300 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>Concert Line-Array PA System + DJ Booth &amp; 6 Mics</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>4× Executive VIP Marquees + Ambient Chandeliers</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>150× Executive Banquet Chairs + 150× Plastic Chairs</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-amber-400 font-bold">✓</span>
+                                <span>2 Sound Technicians &amp; Priority Logistics Crew</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="selectPackage('Grand Wedding / Festival Package', 4500)" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-bold text-sm transition-all">
+                        Select Package
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Instant Quote & Booking Calculator Section -->
+    <section id="estimator" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            <div class="bg-brand-dark text-white px-6 py-8 sm:px-10">
+                <span class="text-amber-400 font-bold uppercase tracking-wider text-xs">Real-Time Cost Calculator</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Instant Quote &amp; Booking Estimator</h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">
+                    Adjust your sound systems, canopies, chairs, and rental days below to calculate your exact total in GH₵ and lock in your date.
+                </p>
+            </div>
+
+            <form id="booking-form" class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Left Column: Quick Item Sliders/Inputs & Event Details -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 inline-flex items-center justify-center text-sm font-bold">1</span>
+                            Configure Equipment Quantities
+                        </h3>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Full PA System -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-pa" class="block text-sm font-bold text-slate-800">Full PA Sound System</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 850 / unit / day</span>
+                                <input type="number" id="est-pa" min="0" max="20" value="1" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+
+                            <!-- Double Speaker + Mic -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-speaker" class="block text-sm font-bold text-slate-800">Double Speaker + Mic Set</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 450 / unit / day</span>
+                                <input type="number" id="est-speaker" min="0" max="20" value="0" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+
+                            <!-- Standard 10x10 Canopy -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-canopy-std" class="block text-sm font-bold text-slate-800">Standard 10×10 Canopy</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 150 / unit / day</span>
+                                <input type="number" id="est-canopy-std" min="0" max="50" value="2" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+
+                            <!-- Executive VIP Marquee -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-canopy-vip" class="block text-sm font-bold text-slate-800">Executive VIP Marquee</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 400 / unit / day</span>
+                                <input type="number" id="est-canopy-vip" min="0" max="30" value="0" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+
+                            <!-- Plastic Chairs -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-chair-plastic" class="block text-sm font-bold text-slate-800">Heavy-Duty Plastic Chairs</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 5 / chair / day</span>
+                                <input type="number" id="est-chair-plastic" min="0" max="2000" step="10" value="50" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+
+                            <!-- Banquet Chairs -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <label for="est-chair-banquet" class="block text-sm font-bold text-slate-800">Executive Banquet Chairs</label>
+                                <span class="text-xs text-slate-500 block mb-2">GH₵ 15 / chair / day</span>
+                                <input type="number" id="est-chair-banquet" min="0" max="1000" step="5" value="0" class="est-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Logistics Details -->
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 inline-flex items-center justify-center text-sm font-bold">2</span>
+                            Event Schedule &amp; Delivery Location
+                        </h3>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label for="est-days" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Rental Duration (Days)</label>
+                                <input type="number" id="est-days" min="1" max="30" value="1" required class="est-input w-full px-4 py-3 rounded-xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="est-date" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Event Date</label>
+                                <input type="date" id="est-date" required class="w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="est-location" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">City / Area in Ghana</label>
+                                <select id="est-location" class="est-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-900 bg-white focus:ring-2 focus:ring-amber-500 outline-none">
+                                    <option value="Accra (Central / East Legon / Airport)" data-delivery="100">Accra (GH₵ 100 Delivery)</option>
+                                    <option value="Tema / Spintex / Ashaiman" data-delivery="120">Tema / Spintex (GH₵ 120 Delivery)</option>
+                                    <option value="Kasoa / Weija / McCarthy Hill" data-delivery="150">Kasoa / Weija (GH₵ 150 Delivery)</option>
+                                    <option value="Kumasi Metro" data-delivery="200">Kumasi Metro (GH₵ 200 Delivery)</option>
+                                    <option value="Takoradi / Cape Coast" data-delivery="250">Takoradi / Cape Coast (GH₵ 250 Delivery)</option>
+                                    <option value="Other Region (Custom Quote)" data-delivery="300">Other Region (GH₵ 300 Est.)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label for="cust-name" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Your Name / Organization</label>
+                                <input type="text" id="cust-name" placeholder="e.g., Kwame Mensah" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="cust-phone" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Phone / WhatsApp Number</label>
+                                <input type="tel" id="cust-phone" placeholder="e.g., 024 400 0000" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Summary Box -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 sticky top-24 border border-slate-800 shadow-xl">
+                        <h3 class="text-xl font-extrabold text-white border-b border-slate-800 pb-4">Live Rental Summary</h3>
+
+                        <div id="est-breakdown" class="py-5 space-y-3 text-sm border-b border-slate-800">
+                            <!-- Dynamic breakdown items injected by JS -->
+                        </div>
+
+                        <div class="py-5 space-y-2.5 text-sm">
+                            <div class="flex justify-between text-slate-300">
+                                <span>Daily Equipment Rate:</span>
+                                <span id="est-daily-rate" class="font-bold text-white">GH₵ 1,400.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-300">
+                                <span>Duration Multiplier:</span>
+                                <span id="est-days-label" class="font-bold text-amber-400">× 1 Day</span>
+                            </div>
+                            <div class="flex justify-between text-slate-300">
+                                <span>Logistics &amp; Setup Fee:</span>
+                                <span id="est-delivery-fee" class="font-bold text-white">GH₵ 100.00</span>
+                            </div>
+                            <div class="pt-4 mt-2 border-t border-slate-800 flex justify-between items-baseline">
+                                <span class="text-base font-bold text-slate-200">Estimated Total:</span>
+                                <span id="est-grand-total" class="text-3xl font-extrabold text-amber-400">GH₵ 1,500.00</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2">
+                            Submit Booking Request
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+
+                        <p class="text-[11px] text-slate-400 text-center mt-3">
+                            No upfront card payment required. Our Trackone dispatch team confirms availability within 15 minutes.
+                        </p>
+
+                        <!-- Confirmation Banner (Hidden until form submission) -->
+                        <div id="booking-confirmation" class="hidden mt-5 p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-sm">
+                            <p class="font-extrabold text-emerald-200 flex items-center gap-2">
+                                <span>🎉</span> Booking Request Received!
+                            </p>
+                            <p id="confirmation-details" class="mt-1 text-xs leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Why Choose Trackone Section -->
+    <section class="py-16 bg-slate-100 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-amber-600 font-bold uppercase tracking-wider text-xs">The Trackone Standard</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Why Event Planners Trust Trackone.org.gh</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">⏱️</div>
+                    <h3 class="font-bold text-lg text-slate-900">Guaranteed On-Time Delivery</h3>
+                    <p class="text-slate-600 text-sm mt-2">We arrive hours before your guests so every canopy, chair, and speaker is tested and ready.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">🎚️</div>
+                    <h3 class="font-bold text-lg text-slate-900">Pro Sound Technicians</h3>
+                    <p class="text-slate-600 text-sm mt-2">Zero feedback or dead mics. Our trained audio engineers stay on-site to manage sound levels.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">✨</div>
+                    <h3 class="font-bold text-lg text-slate-900">Sanitized &amp; Spotless Gear</h3>
+                    <p class="text-slate-600 text-sm mt-2">Every plastic chair, banquet seat, and canopy canvas is thoroughly washed before dispatch.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">🇬🇭</div>
+                    <h3 class="font-bold text-lg text-slate-900">Flexible GH₵ Payments</h3>
+                    <p class="text-slate-600 text-sm mt-2">Pay conveniently via MTN MoMo, Telecel Cash, Bank Transfer, or Corporate Invoice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-brand-dark text-slate-300 pt-16 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                <!-- Brand Col -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 font-extrabold text-xl">
+                            T1
+                        </div>
+                        <span class="font-extrabold text-xl text-white">Trackone<span class="text-amber-400">.org.gh</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Trackone Online Store is Ghana's trusted event equipment partner for public sound systems, executive canopies, and event chairs.
+                    </p>
+                    <p class="text-xs text-amber-400 font-semibold">Official Website: www.trackone.org.gh</p>
+                </div>
+
+                <!-- Services Col -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Rental Categories</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Public Sound Systems &amp; PA</a></li>
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Wireless Microphones &amp; Mixers</a></li>
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Standard 10×10 Canopies</a></li>
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Executive VIP Wedding Marquees</a></li>
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Plastic &amp; Banquet Chairs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links Col -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#home" class="hover:text-amber-400 transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-amber-400 transition-colors">Services &amp; Pricing</a></li>
+                        <li><a href="#packages" class="hover:text-amber-400 transition-colors">Combo Event Packages</a></li>
+                        <li><a href="#estimator" class="hover:text-amber-400 transition-colors">Instant Quote Calculator</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Col -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Dispatch &amp; Booking Desk</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-amber-400">📍</span>
+                            <span>Spintex Road / East Legon Hub, Accra, Ghana</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <span class="text-amber-400">📞</span>
+                            <a href="tel:+233240000000" class="hover:text-white">+233 (0) 24 000 0000</a>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <span class="text-amber-400">✉️</span>
+                            <a href="mailto:bookings@trackone.org.gh" class="hover:text-white">bookings@trackone.org.gh</a>
+                        </li>
+                        <li class="pt-2">
+                            <a href="https://wa.me/233240000000?text=Hello%20Trackone.org.gh!%20I%20would%20like%20to%20inquire%20about%20event%20rentals." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors">
+                                <span>💬</span> Chat on WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Trackone Online Store (Trackone.org.gh). All rights reserved.</p>
+                <p>Prices listed in Ghana Cedis (GH₵). Delivery available nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Quick-Chat Button -->
+    <a href="https://wa.me/233240000000?text=Hello%20Trackone.org.gh!%20I%20need%20a%20quote%20for%20sound%20system,%20canopies,%20or%20chairs." target="_blank" rel="noopener noreferrer" aria-label="Chat with Trackone on WhatsApp" class="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/30 transition-transform hover:scale-105">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+        </svg>
+        <span class="hidden sm:inline">WhatsApp Us</span>
+    </a>
+
+    <!-- Interactive Quote / Cart Slide-Over Drawer -->
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden transition-opacity">
+        <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300">
+            <!-- Drawer Header -->
+            <div class="px-6 py-5 bg-brand-dark text-white flex items-center justify-between">
+                <div>
+                    <h3 class="font-extrabold text-lg">Your Trackone Quote List</h3>
+                    <p class="text-xs text-slate-400">Review selected items &amp; daily rates</p>
+                </div>
+                <button id="close-cart-btn" type="button" aria-label="Close Quote Drawer" class="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Drawer Body (Cart Items) -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Drawer Footer -->
+            <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
+                <div class="flex items-center justify-between text-base">
+                    <span class="font-bold text-slate-700">Estimated Daily Subtotal:</span>
+                    <span id="cart-total-amount" class="text-2xl font-extrabold text-slate-900">GH₵ 0.00</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="clear-cart-btn" type="button" class="py-3 px-4 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors">
+                        Clear List
+                    </button>
+                    <button id="proceed-estimator-btn" type="button" class="py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow-md transition-colors">
+                        Finalize Booking →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Application Logic -->
+    <script>
+        // ==========================================
+        // 1. CATALOG DATA (GH₵ Daily Rates)
+        // ==========================================
+        const catalogItems = [
+            // Sound Systems
+            {
+                id: 'pa-full',
+                category: 'sound',
+                badge: 'Sound System',
+                name: 'Full PA Sound System',
+                price: 850,
+                unit: 'set / day',
+                description: 'Complete high-output event audio setup for outdoor crowds up to 500 guests.',
+                specs: ['2× 15" Active Top Speakers + 2× 18" Subwoofers', '12-Channel Digital Mixer + 4 Wireless Microphones', 'Includes setup cables & sound technician check']
+            },
+            {
+                id: 'speaker-double',
+                category: 'sound',
+                badge: 'Sound System',
+                name: 'Double Speaker + Wireless Mic Set',
+                price: 450,
+                unit: 'set / day',
+                description: 'Crisp vocal clarity ideal for engagements, parties, church meetings & announcements.',
+                specs: ['2× Powered 15" Speakers on Tripod Stands', '2× UHF Wireless Handheld Microphones', 'Bluetooth / USB / AUX laptop & phone input']
+            },
+            {
+                id: 'dj-pro-rig',
+                category: 'sound',
+                badge: 'Sound System',
+                name: 'DJ Gear & Line-Array Upgrade',
+                price: 1200,
+                unit: 'set / day',
+                description: 'Club-grade bass and festival projection for weddings, concerts, and corporate parties.',
+                specs: ['4× Line-Array Tops + 4× Heavy Subwoofers', 'Pioneer DJ Controller + Stage Monitor', 'Dedicated on-site audio engineer included']
+            },
+            // Canopies
+            {
+                id: 'canopy-standard',
+                category: 'canopies',
+                badge: 'Canopy Rental',
+                name: 'Standard 10×10 Event Canopy',
+                price: 150,
+                unit: 'canopy / day',
+                description: 'Durable, weather-resistant canopy tent suitable for outdoor seating and vendor booths.',
+                specs: ['Seats 20–25 guests comfortably per canopy', 'Heavy-duty galvanized steel frame', 'Clean white waterproof tarpaulin top']
+            },
+            {
+                id: 'canopy-vip',
+                category: 'canopies',
+                badge: 'Canopy Rental',
+                name: 'Executive VIP Marquee Canopy',
+                price: 400,
+                unit: 'marquee / day',
+                description: 'High-peak luxury marquee tent designed for weddings, VIP high tables, and corporate events.',
+                specs: ['Seats 40–50 guests with spacious headroom', 'Elegant pleated white ceiling liner option', 'Wind-anchored & rain-sealed structure']
+            },
+            {
+                id: 'canopy-double-bay',
+                category: 'canopies',
+                badge: 'Canopy Rental',
+                name: 'Double-Bay Grand Wedding Tent',
+                price: 750,
+                unit: 'tent / day',
+                description: 'Expansive interconnected marquee shelter for large receptions and durbars.',
+                specs: ['Seats up to 100 guests under single cover', 'Includes warm fairy/LED ceiling lighting', 'Full installation & dismantling crew']
+            },
+            // Chairs
+            {
+                id: 'chair-plastic',
+                category: 'chairs',
+                badge: 'Chair Rental',
+                name: 'Heavy-Duty Plastic Chairs',
+                price: 5,
+                unit: 'chair / day',
+                description: 'Reinforced, spotless white or blue event chairs built for comfort and durability.',
+                specs: ['Washed & sanitized prior to every delivery', 'High weight capacity (up to 150kg)', 'Minimum order: 20 chairs']
+            },
+            {
+                id: 'chair-banquet',
+                category: 'chairs',
+                badge: 'Chair Rental',
+                name: 'Executive Banquet Chairs',
+                price: 15,
+                unit: 'chair / day',
+                description: 'Cushioned gold/silver steel-frame banquet chairs for weddings and formal dinners.',
+                specs: ['Thick high-density foam seat & backrest', 'Stackable elegance for indoor or marquee use', 'Optional spandex chair covers available']
+            },
+            {
+                id: 'chair-covers-sash',
+                category: 'chairs',
+                badge: 'Chair Rental',
+                name: 'VIP Padded Chair + Cover & Sash',
+                price: 22,
+                unit: 'chair / day',
+                description: 'Dressed luxury seating styled in your event color theme (Gold, Royal Blue, Burgundy, White).',
+                specs: ['Includes pressed spandex cover + satin sash', 'Ideal for bridal party & VIP high-table rows', 'On-site dressing by Trackone decor team']
+            }
+        ];
+
+        // ==========================================
+        // 2. STATE MANAGEMENT (Quote Cart)
+        // ==========================================
+        let quoteCart = [];
+
+        // Format currency in GH₵
+        function formatGHS(amount) {
+            return 'GH₵ ' + Number(amount).toLocaleString('en-GH', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Custom Toast Notification (No alert())
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-slate-900 text-white border border-amber-500/50 px-4 py-3 rounded-2xl shadow-xl text-sm font-semibold flex items-center gap-2.5 transform transition-all duration-300 translate-y-2 opacity-0';
+            toast.innerHTML = `<span class="text-amber-400">✓</span> <span>${message}</span>`;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ==========================================
+        // 3. RENDER CATALOG CARDS & FILTERING
+        // ==========================================
+        function renderCatalog(filter = 'all') {
+            const grid = document.getElementById('catalog-grid');
+            const filtered = filter === 'all'
+                ? catalogItems
+                : catalogItems.filter(item => item.category === filter);
+
+            grid.innerHTML = filtered.map(item => {
+                const defaultQty = item.id === 'chair-plastic' ? 50 : (item.category === 'chairs' ? 20 : 1);
+                return `
+                    <article class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-sm hover:shadow-xl hover:border-amber-400/60 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wide">
+                                    ${item.badge}
+                                </span>
+                                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
+                                    In Stock
+                                </span>
+                            </div>
+
+                            <h3 class="text-xl font-extrabold text-slate-900">${item.name}</h3>
+                            <p class="text-slate-600 text-sm mt-2 leading-relaxed">${item.description}</p>
+
+                            <div class="my-5 p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-baseline justify-between">
+                                <div>
+                                    <span class="text-2xl sm:text-3xl font-extrabold text-slate-900">GH₵ ${item.price.toLocaleString()}</span>
+                                    <span class="text-xs font-medium text-slate-500"> / ${item.unit}</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-2 text-xs sm:text-sm text-slate-600 mb-6">
+                                ${item.specs.map(spec => `
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-amber-500 font-bold mt-0.5">•</span>
+                                        <span>${spec}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+                            <div class="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-slate-50">
+                                <button type="button" onclick="adjustCardQty('${item.id}', -1)" aria-label="Decrease quantity" class="px-3 py-2.5 text-slate-700 hover:bg-slate-200 font-bold text-sm">−</button>
+                                <input type="number" id="qty-${item.id}" value="${defaultQty}" min="1" max="2000" aria-label="Quantity for ${item.name}" class="w-14 text-center bg-transparent font-bold text-sm text-slate-900 focus:outline-none">
+                                <button type="button" onclick="adjustCardQty('${item.id}', 1)" aria-label="Increase quantity" class="px-3 py-2.5 text-slate-700 hover:bg-slate-200 font-bold text-sm">+</button>
+                            </div>
+
+                            <button type="button" onclick="addToCart('${item.id}')" class="flex-1 py-3 px-4 rounded-xl bg-brand-dark hover:bg-amber-500 text-white hover:text-slate-950 font-bold text-sm transition-colors shadow-sm">
+                                Add to Quote
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function adjustCardQty(id, delta) {
+            const input = document.getElementById(`qty-${id}`);
+            if (!input) return;
+            const step = id.includes('chair') ? 10 : 1;
+            const current = parseInt(input.value, 10) || 1;
+            const next = Math.max(1, current + (delta * step));
+            input.value = next;
+        }
+
+        // Filter Tab Event Listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-brand-dark', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+                });
+                btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+                btn.classList.add('bg-brand-dark', 'text-white', 'shadow-md');
+                renderCatalog(btn.dataset.filter);
+            });
+        });
+
+        // ==========================================
+        // 4. QUOTE CART DRAWER FUNCTIONALITY
+        // ==========================================
+        function addToCart(itemId) {
+            const item = catalogItems.find(i => i.id === itemId);
+            const qtyInput = document.getElementById(`qty-${itemId}`);
+            const qty = Math.max(1, parseInt(qtyInput ? qtyInput.value : 1, 10));
+
+            const existing = quoteCart.find(c => c.id === itemId);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                quoteCart.push({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    qty: qty
+                });
+            }
+
+            updateCartUI();
+            showToast(`Added ${qty}× ${item.name} to Quote List`);
+        }
+
+        function selectPackage(packageName, packagePrice) {
+            const pkgId = 'pkg-' + packageName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const existing = quoteCart.find(c => c.id === pkgId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                quoteCart.push({
+                    id: pkgId,
+                    name: packageName,
+                    price: packagePrice,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+            openCartDrawer();
+            showToast(`Selected ${packageName}`);
+        }
+
+        function removeFromCart(id) {
+            quoteCart = quoteCart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const totalEl = document.getElementById('cart-total-amount');
+
+            const totalItems = quoteCart.reduce((sum, item) => sum + item.qty, 0);
+            const totalCost = quoteCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            badge.textContent = totalItems;
+            totalEl.textContent = formatGHS(totalCost);
+
+            if (quoteCart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-2xl">🛒</div>
+                        <p class="font-bold text-slate-800">Your quote list is empty</p>
+                        <p class="text-xs text-slate-500 max-w-xs mx-auto">Browse our sound systems, canopies, and chairs to build your custom event rental list.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = quoteCart.map(item => `
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-900">${item.name}</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">${item.qty} × GH₵ ${item.price.toLocaleString()} / day</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-extrabold text-sm text-slate-900">GH₵ ${(item.qty * item.price).toLocaleString()}</span>
+                        <button type="button" onclick="removeFromCart('${item.id}')" aria-label="Remove item" class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Drawer Open/Close Controls
+        const drawerOverlay = document.getElementById('cart-drawer-overlay');
+        const drawerPanel = document.getElementById('cart-drawer');
+
+        function openCartDrawer() {
+            drawerOverlay.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                drawerPanel.classList.remove('translate-x-full');
+            });
+        }
+
+        function closeCartDrawer() {
+            drawerPanel.classList.add('translate-x-full');
+            setTimeout(() => {
+                drawerOverlay.classList.add('hidden');
+            }, 300);
+        }
+
+        document.getElementById('open-cart-btn').addEventListener('click', openCartDrawer);
+        document.getElementById('close-cart-btn').addEventListener('click', closeCartDrawer);
+        drawerOverlay.addEventListener('click', (e) => {
+            if (e.target === drawerOverlay) closeCartDrawer();
+        });
+
+        document.getElementById('clear-cart-btn').addEventListener('click', () => {
+            quoteCart = [];
+            updateCartUI();
+            showToast('Quote list cleared');
+        });
+
+        document.getElementById('proceed-estimator-btn').addEventListener('click', () => {
+            // Sync cart items into estimator fields if matching
+            quoteCart.forEach(item => {
+                if (item.id === 'pa-full') document.getElementById('est-pa').value = item.qty;
+                if (item.id === 'speaker-double') document.getElementById('est-speaker').value = item.qty;
+                if (item.id === 'canopy-standard') document.getElementById('est-canopy-std').value = item.qty;
+                if (item.id === 'canopy-vip') document.getElementById('est-canopy-vip').value = item.qty;
+                if (item.id === 'chair-plastic') document.getElementById('est-chair-plastic').value = item.qty;
+                if (item.id === 'chair-banquet') document.getElementById('est-chair-banquet').value = item.qty;
+            });
+            calculateEstimate();
+            closeCartDrawer();
+            document.getElementById('estimator').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // ==========================================
+        // 5. INSTANT QUOTE & BOOKING CALCULATOR
+        // ==========================================
+        function calculateEstimate() {
+            const paQty = Math.max(0, parseInt(document.getElementById('est-pa').value, 10) || 0);
+            const speakerQty = Math.max(0, parseInt(document.getElementById('est-speaker').value, 10) || 0);
+            const canopyStdQty = Math.max(0, parseInt(document.getElementById('est-canopy-std').value, 10) || 0);
+            const canopyVipQty = Math.max(0, parseInt(document.getElementById('est-canopy-vip').value, 10) || 0);
+            const chairPlasticQty = Math.max(0, parseInt(document.getElementById('est-chair-plastic').value, 10) || 0);
+            const chairBanquetQty = Math.max(0, parseInt(document.getElementById('est-chair-banquet').value, 10) || 0);
+            const days = Math.max(1, parseInt(document.getElementById('est-days').value, 10) || 1);
+
+            const locationSelect = document.getElementById('est-location');
+            const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+            const deliveryFee = parseFloat(selectedOption.dataset.delivery) || 100;
+
+            const lineItems = [
+                { label: 'Full PA Sound System', qty: paQty, rate: 850 },
+                { label: 'Double Speaker + Mic Set', qty: speakerQty, rate: 450 },
+                { label: 'Standard 10×10 Canopy', qty: canopyStdQty, rate: 150 },
+                { label: 'Executive VIP Marquee', qty: canopyVipQty, rate: 400 },
+                { label: 'Heavy-Duty Plastic Chairs', qty: chairPlasticQty, rate: 5 },
+                { label: 'Executive Banquet Chairs', qty: chairBanquetQty, rate: 15 }
+            ].filter(i => i.qty > 0);
+
+            const breakdownEl = document.getElementById('est-breakdown');
+            if (lineItems.length === 0) {
+                breakdownEl.innerHTML = `<p class="text-slate-400 italic text-xs">Add at least one item to calculate your event quote.</p>`;
+            } else {
+                breakdownEl.innerHTML = lineItems.map(i => `
+                    <div class="flex justify-between text-slate-300">
+                        <span>${i.qty}× ${i.label}</span>
+                        <span class="font-semibold text-white">GH₵ ${(i.qty * i.rate).toLocaleString()}/day</span>
+                    </div>
+                `).join('');
+            }
+
+            const dailySubtotal = lineItems.reduce((sum, i) => sum + (i.qty * i.rate), 0);
+            const grandTotal = (dailySubtotal * days) + (dailySubtotal > 0 ? deliveryFee : 0);
+
+            document.getElementById('est-daily-rate').textContent = formatGHS(dailySubtotal);
+            document.getElementById('est-days-label').textContent = `× ${days} ${days === 1 ? 'Day' : 'Days'}`;
+            document.getElementById('est-delivery-fee').textContent = dailySubtotal > 0 ? formatGHS(deliveryFee) : 'GH₵ 0.00';
+            document.getElementById('est-grand-total').textContent = formatGHS(grandTotal);
+        }
+
+        document.querySelectorAll('.est-input').forEach(input => {
+            input.addEventListener('input', calculateEstimate);
+            input.addEventListener('change', calculateEstimate);
+        });
+
+        // Booking Form Submission
+        document.getElementById('booking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const date = document.getElementById('est-date').value;
+            const location = document.getElementById('est-location').value;
+            const total = document.getElementById('est-grand-total').textContent;
+
+            const confirmationBox = document.getElementById('booking-confirmation');
+            const confirmationText = document.getElementById('confirmation-details');
+
+            confirmationText.innerHTML = `
+                Thank you, <strong>${name}</strong>! Your quote of <strong>${total}</strong> for <strong>${date}</strong> in <strong>${location}</strong> has been logged with Trackone.org.gh. Our dispatch coordinator will call or WhatsApp <strong>${phone}</strong> shortly to confirm delivery time.
+            `;
+            confirmationBox.classList.remove('hidden');
+            showToast('Booking request submitted to Trackone.org.gh!');
+        });
+
+        // ==========================================
+        // 6. MOBILE MENU & INITIALIZATION
+        // ==========================================
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Set default event date to 7 days from today
+        window.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('est-date');
+            const nextWeek = new Date();
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            dateInput.value = nextWeek.toISOString().split('T')[0];
+
+            renderCatalog('all');
+            updateCartUI();
+            calculateEstimate();
+        });
+    </script>
+</body>
+  </html>
